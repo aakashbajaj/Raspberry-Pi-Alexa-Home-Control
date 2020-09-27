@@ -16,7 +16,7 @@ pins = {
 for k in pins.keys():
     GPIO.setup(pins[k], GPIO.OUT)
     GPIO.output(pins[k], GPIO.LOW)
-    time.sleep(2)
+    time.sleep(1)
     GPIO.output(pins[k], GPIO.HIGH)
 
 
