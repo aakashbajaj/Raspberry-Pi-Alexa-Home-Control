@@ -34,8 +34,7 @@ def home():
 
 @app.route('/smarthome/<device>/<action>', methods=['GET'])
 def switcher(device, action):
-    device_key = device.lower()a
-
+    device_key = device.lower()
 
 @app.route('/smarthome/<device>/status', methods=['GET'])
 def status(device):
