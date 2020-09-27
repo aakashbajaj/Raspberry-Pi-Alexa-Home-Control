@@ -35,7 +35,7 @@ def home():
 
 @app.route('/smarthome/<device>/<action>', methods=['GET'])
 def switcher(device, action):
-    device_key = device.lower()
+    device_key = device.upper()
 
     if device_key == "MAXFAN":
         if action == "turn_on":
