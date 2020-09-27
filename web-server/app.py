@@ -15,9 +15,9 @@ pins = {
 
 for k in pins.keys():
     GPIO.setup(pins[k], GPIO.OUT)
-    GPIO.setup(pins[k], GPIO.LOW)
+    GPIO.output(pins[k], GPIO.LOW)
     time.sleep(2)
-    GPIO.setup(pins[k], GPIO.HIGH)
+    GPIO.output(pins[k], GPIO.HIGH)
 
 
 @app.route('/', methods=["GET"])
