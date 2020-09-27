@@ -15,12 +15,12 @@ pins = {
 
 for k in pins.keys():
     GPIO.setup(pins[k], GPIO.OUT)
-    GPIO.output(pins[k], GPIO.HIGH)
-    time.sleep(2)
     GPIO.output(pins[k], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(pins[k], GPIO.HIGH)
 
 
-GPIO.output(pins["MAXFAN"], GPIO.HIGH)
+# GPIO.output(pins["MAXFAN"], GPIO.LOW)
 
 
 @app.route('/', methods=["GET"])
@@ -32,17 +32,31 @@ def home():
 
         return jsonify({'data': data})
 
+
 @app.route('/smarthome/<device>/<action>', methods=['GET'])
 def switcher(device, action):
     device_key = device.lower()
+
+    if device_key == "MAXFAN":
+        if action == "turn_on":
+            GPIO.output(pins[device_key], GPIO.LOW)
+        elif action == "turn_off":
+            GPIO.output(pins[device_key], GPIO.HIGH)
+    else:
+        if action == "turn_on":
+            GPIO.output(pins[device_key], GPIO.HIGH)
+        elif action == "turn_off":
+            GPIO.output(pins[device_key], GPIO.LOW)
+
 
 @app.route('/smarthome/<device>/status', methods=['GET'])
 def status(device):
     device_key = device.upper()
 
-    data = {
-        "state": "on" if GPIO.input(pins[device_key]) is 0 else "off"
-    }
+    if device_key == "MAXFAN":
+        data = {"state": "on" if GPIO.input(pins[device_key]) is 0 else "off"}
+    else:
+        data = {"state": "on" if GPIO.input(pins[device_key]) is 1 else "off"}
 
     return jsonify(data)
 
