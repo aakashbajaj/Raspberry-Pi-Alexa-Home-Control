@@ -44,5 +44,5 @@ def status(device):
     return jsonify(data)
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     app.run(port=5600, debug=True)
