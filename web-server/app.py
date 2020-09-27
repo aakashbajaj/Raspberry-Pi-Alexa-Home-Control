@@ -48,7 +48,7 @@ def switcher(device, action):
         elif action == "turn_off":
             GPIO.output(pins[device_key], GPIO.LOW)
 
-    return f"{device_key} {action} successful!"
+    return jsonify({"data": f"{device_key} {action} successful!"})
 
 
 @app.route('/smarthome/<device>/status', methods=['GET'])
