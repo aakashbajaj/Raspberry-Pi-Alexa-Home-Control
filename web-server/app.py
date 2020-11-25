@@ -7,8 +7,8 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 
 pins = {
-    "TUBELIGHT": 2,
-    "FAN": 3,
+    "TUBELIGHT": 3,
+    "FAN": 2,
     "MAXFAN": 4,
     "LOOSE": 14
 }
