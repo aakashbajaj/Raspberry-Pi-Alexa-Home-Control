@@ -1,0 +1,44 @@
+{
+    "FAUXMO": {
+        "ip_address": "auto"
+    },
+    "PLUGINS": {
+        "SimpleHTTPPlugin": {
+            "DEVICES": [
+                {
+                    "name": "Tubelight",
+                    "port": 12340,
+                    "on_cmd": "http://localhost:5600/smarthome/tubelight/turn_on",
+                    "off_cmd": "http://localhost:5600/smarthome/tubelight/turn_off",
+                    "method": "GET",
+                    "state_method": "GET",
+                    "state_cmd": "http://localhost:5600/smarthome/tubelight/status",
+                    "state_response_on": "\"state\": \"on\"",
+                    "state_response_off": "\"state\": \"off\""
+                },
+                {
+                    "name": "Fan",
+                    "port": 12341,
+                    "on_cmd": "http://localhost:5600/smarthome/fan/turn_on",
+                    "off_cmd": "http://localhost:5600/smarthome/fan/turn_off",
+                    "method": "GET",
+                    "state_method": "GET",
+                    "state_cmd": "http://localhost:5600/smarthome/fan/status",
+                    "state_response_on": "\"state\": \"on\"",
+                    "state_response_off": "\"state\": \"off\""
+                },
+                {
+                    "name": "Max Fan",
+                    "port": 12343,
+                    "on_cmd": "http://localhost:5600/smarthome/maxfan/turn_on",
+                    "off_cmd": "http://localhost:5600/smarthome/maxfan/turn_off",
+                    "method": "GET",
+                    "state_method": "GET",
+                    "state_cmd": "http://localhost:5600/smarthome/maxfan/status",
+                    "state_response_on": "\"state\": \"on\"",
+                    "state_response_off": "\"state\": \"off\""
+                }
+            ]
+        }
+    }
+}
