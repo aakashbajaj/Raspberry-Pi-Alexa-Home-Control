@@ -7,10 +7,11 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 
 pins = {
-    "TUBELIGHT": 3,
-    "FAN": 2,
-    "MAXFAN": 4,
-    "LOOSE": 14
+    "TUBELIGHT": 2,
+    "FAN": 3,
+    "BULB": 4,
+    "MAXFAN": 14,
+    "BANDCONTROL": 20
 }
 
 for k in pins.keys():
@@ -18,7 +19,6 @@ for k in pins.keys():
     GPIO.output(pins[k], GPIO.LOW)
     time.sleep(1)
     GPIO.output(pins[k], GPIO.HIGH)
-
 
 # GPIO.output(pins["MAXFAN"], GPIO.LOW)
 
@@ -28,7 +28,9 @@ def home():
     if(request.method == 'GET'):
         data = {}
         for k in pins.keys():
-            data[k] = "on" if GPIO.input(pins[k]) is 0 else "off"
+            data[k] = "on" if GPIO.input(pins[k]) is 1 else "off"
+
+        data["MAXFAN"] = "on" if GPIO.input(pins["MAXFAN"]) is 0 else "off"
 
         return jsonify({'data': data})
 
@@ -40,11 +42,14 @@ def switcher(device, action):
     if device_key == "MAXFAN":
         if action == "turn_on":
             GPIO.output(pins[device_key], GPIO.LOW)
+            
         elif action == "turn_off":
             GPIO.output(pins[device_key], GPIO.HIGH)
+
     else:
         if action == "turn_on":
             GPIO.output(pins[device_key], GPIO.HIGH)
+            
         elif action == "turn_off":
             GPIO.output(pins[device_key], GPIO.LOW)
 
